@@ -8,6 +8,10 @@ public class Task {
         description="";
     }
     
+    public String getName(){
+        return name;
+    }
+    
     public boolean validate(){
         if(name==null||description==null||name.equals("")||description.equals("")){
             return false;
