@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.ListIterator;
+import javax.swing.JOptionPane;
 
 
 public class TaskMaster extends javax.swing.JFrame {
@@ -23,8 +24,8 @@ public class TaskMaster extends javax.swing.JFrame {
 
         txtnam = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        txtdes = new javax.swing.JTextArea();
+        lblnam = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -49,11 +50,11 @@ public class TaskMaster extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtdes.setColumns(20);
+        txtdes.setRows(5);
+        jScrollPane1.setViewportView(txtdes);
 
-        jLabel1.setText("Name:");
+        lblnam.setText("Name:");
 
         jLabel2.setText("Description:");
 
@@ -153,14 +154,13 @@ public class TaskMaster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(lblnam)
                     .addComponent(jLabel2))
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                        .addComponent(txtnam)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addComponent(txtnam))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -173,7 +173,7 @@ public class TaskMaster extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtnam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(lblnam))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -190,6 +190,19 @@ public class TaskMaster extends javax.swing.JFrame {
 
     private void maftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maftActionPerformed
         String nm=txtnam.getText();
+        String d = txtdes.getText();
+        Task t = new Task(nm,d);
+        if(t.validate()==false){
+            JOptionPane.showMessageDialog(this,"Task Added");
+            return;
+        }
+        if(tottask>0) li.next();
+        
+        li.add(t);
+        li.previous();
+        curtask++;
+        tottask++;
+        lblnam
     }//GEN-LAST:event_maftActionPerformed
 
 
@@ -222,7 +235,6 @@ public class TaskMaster extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -242,10 +254,11 @@ public class TaskMaster extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblnam;
     private javax.swing.JMenuItem maft;
     private javax.swing.JTextPane txtCur;
     private javax.swing.JTextPane txtTot;
+    private javax.swing.JTextArea txtdes;
     private javax.swing.JTextField txtnam;
     // End of variables declaration//GEN-END:variables
 }
