@@ -12,6 +12,9 @@ public class Task {
         return name;
     }
     
+    public String getDescription(){
+        return description;
+    }
     public boolean validate(){
         if(name==null||description==null||name.equals("")||description.equals("")){
             return false;

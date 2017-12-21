@@ -35,6 +35,10 @@ public class TaskMaster extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtTot = new javax.swing.JTextPane();
         jPanel2 = new javax.swing.JPanel();
+        btnfir = new javax.swing.JButton();
+        btnpre = new javax.swing.JButton();
+        btnnex = new javax.swing.JButton();
+        btnlas = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -93,15 +97,49 @@ public class TaskMaster extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
+        btnfir.setText("<<<");
+
+        btnpre.setText("<");
+
+        btnnex.setText(">");
+        btnnex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnexActionPerformed(evt);
+            }
+        });
+
+        btnlas.setText(">>>");
+        btnlas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnfir)
+                .addGap(18, 18, 18)
+                .addComponent(btnpre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnnex)
+                .addGap(18, 18, 18)
+                .addComponent(btnlas)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnfir)
+                    .addComponent(btnpre)
+                    .addComponent(btnnex)
+                    .addComponent(btnlas))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Program");
@@ -162,10 +200,10 @@ public class TaskMaster extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                     .addComponent(txtnam))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(86, 86, 86))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,8 +240,32 @@ public class TaskMaster extends javax.swing.JFrame {
         li.previous();
         curtask++;
         tottask++;
-        lblnam
+        txtTot.setText(""+tottask);
+        txtCur.setText(""+curtask);
+        JOptionPane.showMessageDialog(this,"Task added");
     }//GEN-LAST:event_maftActionPerformed
+
+    private void btnlasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlasActionPerformed
+        if(curtask==tottask) return;
+        while(li.hasNext())
+            li.next();
+        t=(Task)li.previous();
+        curtask=tottask;
+        txtCur.setText(""+curtask);
+        txtnam.setText(t.getName());
+        txtdes.setText(t.getDescription());
+    }//GEN-LAST:event_btnlasActionPerformed
+
+    private void btnnexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnexActionPerformed
+        if(curtask==tottask) return;
+        curtask++;
+        txtCur.setText(""+curtask);
+        li.next();
+        li.next();
+        t=(Task)li.previous();
+        txtnam.setText(t.getName());
+        txtdes.setText(t.getDescription());
+    }//GEN-LAST:event_btnnexActionPerformed
 
 
     public static void main(String args[]) {
@@ -235,6 +297,10 @@ public class TaskMaster extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnfir;
+    private javax.swing.JButton btnlas;
+    private javax.swing.JButton btnnex;
+    private javax.swing.JButton btnpre;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
